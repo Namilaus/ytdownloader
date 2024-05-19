@@ -1,0 +1,5 @@
+User muss die moglichkeit haben, mit ein youtube link den video herunterzuladen
+User kann den quality und datei extention auswahlen sont wird das beste quality und mp4 automatisch ausgewahlt
+User muss die moglichkeit haben, ein ganzes youtube playlist herunterzuladen.
+User kann auswahlen von welche video bis ende  ein playlist heruntergeladen wird.
+
