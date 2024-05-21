@@ -18,9 +18,13 @@ def download_playlist_specific(playlist_url:str)->list:
         return playlist_dwurl
 
 
-arrayoflist = download_playlist_specific('https://www.youtube.com/watch?v=viukm2i-eYY&list=PLwXXfk5wsyAB0jtiodt1i6NB5rvv_ZiKd')
+video_list_info = download_playlist_specific('https://www.youtube.com/watch?v=viukm2i-eYY&list=PLwXXfk5wsyAB0jtiodt1i6NB5rvv_ZiKd')
 
-print(arrayoflist['entries'][0]['url'])
+playlist_length = video_list_info['playlist_count']
 
-for index,info in enumerate(arrayoflist):
-    print(info[18])
+for info in video_list_info:
+    print(info)
+
+for index in range(0,playlist_length):
+    print(f'{index+1} link - {video_list_info["entries"][index]["url"]}')
+
