@@ -13,18 +13,19 @@ def download_playlist_specific(playlist_url:str)->list:
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         # Download the playlist
-        playlist_dwurl = ydl.extract_info(playlist_url, download=False)
+        playlist_info = ydl.extract_info(playlist_url, download=False)
         
-        return playlist_dwurl
+    playlist_length = playlist_info['playlist_count']
 
 
-video_list_info = download_playlist_specific('https://www.youtube.com/watch?v=viukm2i-eYY&list=PLwXXfk5wsyAB0jtiodt1i6NB5rvv_ZiKd')
+    playlist_urls = list()
 
-playlist_length = video_list_info['playlist_count']
+    for index in range(0,playlist_length):
+        #print(f'{index+1} link - {video_list_info["entries"][index]["url"]}')
+        playlist_urls.append(playlist_info['entries'][index]['url'])    
+    
+    return playlist_urls
 
-for info in video_list_info:
-    print(info)
+print(download_playlist_specific('https://www.youtube.com/watch?v=viukm2i-eYY&list=PLwXXfk5wsyAB0jtiodt1i6NB5rvv_ZiKd'))
 
-for index in range(0,playlist_length):
-    print(f'{index+1} link - {video_list_info["entries"][index]["url"]}')
-
+    
