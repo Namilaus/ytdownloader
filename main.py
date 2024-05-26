@@ -5,7 +5,9 @@ def download_video(video_url:str)->dict:
     # Options for downloading the playlist
     ydl_opts = {
             'format':'best',
-            'forceurl':True
+            'quiet':True,
+            'no_warnings':True
+   
             }
     
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -26,7 +28,9 @@ def download_playlist(playlist_url:str)->dict:
 
     ydl_opts = {
         'format': 'best',
-        'yes-playlist': True
+        'yes-playlist': True,
+        'quiet':True,
+        'no_warnings':True
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -53,7 +57,10 @@ def download_playlist_specific(playlist_url:str,playliststart:int)->dict:
     ydl_opts = {
             'format':'best',
             'yes-playlist':True,
-            'playliststart': str(playliststart)
+            'playliststart': str(playliststart),
+            'quiet':True,
+            'no_warnings':True
+
             }
     
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
