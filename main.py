@@ -41,7 +41,8 @@ def download_playlist(playlist_url:str)->dict:
     
     playlist_urls = {
                 'titles':[],
-                'urls':[]
+                'urls':[],
+                'playlist_length':playlist_length
             }
 
     for index in range(0,playlist_length):
@@ -72,7 +73,8 @@ def download_playlist_specific(playlist_url:str,playliststart:int)->dict:
     print(playlist_length)
     playlist_urls = {
                 'titles':[],
-                'urls':[]
+                'urls':[],
+                'playlist_length':playlist_length
             }
 
     for index in range(0,playlist_length):

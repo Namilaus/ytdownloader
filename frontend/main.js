@@ -4,6 +4,13 @@ const input = document.getElementById("url")
 const button = document.getElementById("download_button")
 const option = document.getElementById("option")
 
+function showLoading() {
+    document.getElementById('loading-animation').style.display = 'flex';
+}
+
+function hideLoading() {
+    document.getElementById('loading-animation').style.display = 'none';
+}
 
 function errorMsg(text){
     const errorMsg = document.createElement("p")
@@ -46,7 +53,7 @@ function removeErrorMsg(){
 button.addEventListener('click',(e)=>{
     
     removeErrorMsg()
-    
+    showLoading();
     e.preventDefault()
    
     if(input.value==='' || option.value ===''){
@@ -56,18 +63,57 @@ button.addEventListener('click',(e)=>{
     }
     else if(input.value!=='' && option.value === 'download_video'){
     fetch('http://127.0.0.1:8000/download_video',{
-    method:'POST',
-    mode:"cors",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body:JSON.stringify({url:input.value})
-}).then(res => { 
-
-    console.log(res)
-    return res.json()}).then((resp)=>{
-        addLinktoContainer(resp.url,resp.title)
+        method:'POST',
+        mode:"cors",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body:JSON.stringify({url:input.value})
     })
+        .then(response => { return response.json()} )
+        .then((response)=>{
+            hideLoading()
+            addLinktoContainer(response.url,response.title)
+    })
+    
+}
+    else if(input.value!=='' && option.value === 'download_playlist'){
+        fetch('http://127.0.0.1:8000/download_playlist',{
+            method:'POST',
+            mode:"cors",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body:JSON.stringify({url:input.value})
+            })
+            .then(response => { return response.json()} )
+            .then((response)=>{
+                hideLoading()
+                const lengthOfPlaylist = response.titles.length
+                for(let i = 0; i < lengthOfPlaylist; i++){
+                    addLinktoContainer(response.urls[i],response.titles[i])
+                }
+            })
+    }
+    else if(input.value!=='' && option.value === 'download_playlist_from'){
+        const startIndex  = parseInt(document.getElementById("startIndex").value)
+        console.log(startIndex)
+        fetch('http://127.0.0.1:8000/download_playlist_specific',{
+            method:'POST',
+            mode:"cors",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body:JSON.stringify({url:input.value,startIndex:startIndex})
+            })
+            .then(response => { return response.json()} )
+            .then((response)=>{
+                hideLoading()
+                const lengthOfPlaylist = response.titles.length
+                for(let i = 0; i < lengthOfPlaylist; i++){
+                    addLinktoContainer(response.urls[i],response.titles[i])
+                }
+            })
     }
 })
 

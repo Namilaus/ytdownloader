@@ -26,16 +26,16 @@ def give_data(download_method:str):
 
         return{
                 'titles':dw_url['titles'],
-                'url':dw_url['urls']
+                'urls':dw_url['urls']
                 }
 
     elif download_method == "download_playlist_specific":
         data = request.json
-        dw_url = download_playlist_specific(data['url'], data['playliststart'])
+        dw_url = download_playlist_specific(data['url'], data['startIndex'])
         
         return{
                 'titles':dw_url['titles'],
-                'url':dw_url['urls']
+                'urls':dw_url['urls']
                 }
 
 
