@@ -69,6 +69,22 @@
 
         .result p {
             margin: 0;
+            font-weight: bold;
+        }
+
+        .how-it-works {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .how-it-works a {
+            color: #ff758c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .how-it-works a:hover {
+            text-decoration: underline;
         }
 
         @media (max-width: 600px) {
@@ -96,9 +112,8 @@
             <input type="text" id="startIndex" name="startIndex" placeholder="Start Index (for playlist)" style="display: none;">
             <button type="submit" id="download_button">Download</button>
         </form>
-        <div class="result" id="result">
-            <p><strong>Title:</strong> <span id="videoTitle"></span></p>
-            <p><strong>Download Link:</strong> <a href="#" id="downloadLink">Click here</a></p>
+        <div class="how-it-works">
+            <p>Want to know how this works? <a href="introduction.html">Click here</a></p>
         </div>
     </div>
 

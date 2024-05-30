@@ -17,13 +17,23 @@ function addLinktoContainer(url,title){
     const result = document.createElement("div")
     const resultUrl = document.createElement("p")
     const resultTitle = document.createElement("p")
+    const span = document.createElement("span")
+    const download_link = document.createElement("a")
+
     result.classList.add("result")
-    resultUrl.textContent = url
-    resultTitle.textContent = title
-    result.style.display = "block"
-    result.appendChild(resultUrl)
+    resultTitle.textContent =  "Title: " + title
+    resultUrl.textContent = "Download Link: "
+    download_link.textContent = "Click Here"
+    download_link.setAttribute("href",url)
+    download_link.setAttribute("target","_blank")
+
+    resultTitle.appendChild(span)
     result.appendChild(resultTitle)
+    resultUrl.appendChild(download_link)
+    result.appendChild(resultUrl)
     container.appendChild(result)
+
+    result.style.display = "block"
 }
 
 function removeErrorMsg(){
@@ -60,10 +70,6 @@ button.addEventListener('click',(e)=>{
     })
     }
 })
-
-
-
-
 
 
 
