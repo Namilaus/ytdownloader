@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "ytdownloader"
+version = "1.0.0"
+description = "A flask server which returns download links of given youtube video or playlist"
+author = "Atayi"
+
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+yt_dlp = ">=2024.4.9"
+flask = "^3.0.2"
+flaks-cors = "^4.0.1"
