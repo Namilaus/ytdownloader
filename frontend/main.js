@@ -85,7 +85,7 @@ button.addEventListener('click',(e)=>{
         .then(response => { 
             console.log(response)
             if(response.status === 505){
-                errorMsg("something went wrong try again")
+                errorMsg("Something went wrong try again, Please make sure that you chose the right Option and type the right link in input")
                 hideLoading()
                 return
             }
@@ -108,7 +108,7 @@ button.addEventListener('click',(e)=>{
             })
             .then(response => { 
                 if(response.status === 505){
-                    errorMsg("something went wrong try again")
+                    errorMsg("Something went wrong try again, Please make sure that you chose the right Option and type the right link in input")
                     hideLoading()
                     return
                 }
@@ -135,7 +135,7 @@ button.addEventListener('click',(e)=>{
             })
             .then(response => { 
                 if(response.status === 505){
-                    errorMsg("something went wrong try again")
+                    errorMsg("Something went wrong try again, Please make sure that you chose the right Option and type the right link in input")
                     hideLoading()
                     return
                 }
