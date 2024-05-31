@@ -20,6 +20,13 @@ function errorMsg(text){
     container.appendChild(errorMsg)
 }
 
+function removeErrorMsg(){
+    errorMsgEl = document.getElementsByClassName("error")[0]
+    if(errorMsgEl !== undefined){
+        container.removeChild(errorMsgEl)
+    }
+}
+
 function removeLinkFromContainer(){
     
         if(document.getElementsByClassName("result")[0]){
@@ -55,12 +62,6 @@ function addLinktoContainer(url,title){
     result.style.display = "block"
 }
 
-function removeErrorMsg(){
-    errorMsgEl = document.getElementsByClassName("error")[0]
-    if(errorMsgEl !== undefined){
-        container.removeChild(errorMsgEl)
-    }
-}
 
 button.addEventListener('click',(e)=>{
     
