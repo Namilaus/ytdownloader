@@ -20,6 +20,18 @@ function errorMsg(text){
     container.appendChild(errorMsg)
 }
 
+function removeLinkFromContainer(){
+    
+        if(document.getElementsByClassName("result")[0]){
+        const results = document.getElementsByClassName("result")
+        for(let index = 0; index < results.length; index++){
+            results[index].style.display = "none"
+        }
+    }
+
+    return
+}
+
 function addLinktoContainer(url,title){
     const result = document.createElement("div")
     const resultUrl = document.createElement("p")
@@ -70,8 +82,16 @@ button.addEventListener('click',(e)=>{
         },
         body:JSON.stringify({url:input.value})
     })
-        .then(response => { return response.json()} )
+        .then(response => { 
+            console.log(response)
+            if(response.status === 505){
+                errorMsg("something went wrong try again")
+                hideLoading()
+                return
+            }
+            return response.json()} )
         .then((response)=>{
+            removeLinkFromContainer()
             hideLoading()
             addLinktoContainer(response.url,response.title)
     })
@@ -86,8 +106,15 @@ button.addEventListener('click',(e)=>{
             },
             body:JSON.stringify({url:input.value})
             })
-            .then(response => { return response.json()} )
+            .then(response => { 
+                if(response.status === 505){
+                    errorMsg("something went wrong try again")
+                    hideLoading()
+                    return
+                }
+                return response.json() } )
             .then((response)=>{
+                removeLinkFromContainer()
                 hideLoading()
                 const lengthOfPlaylist = response.titles.length
                 for(let i = 0; i < lengthOfPlaylist; i++){
@@ -106,8 +133,15 @@ button.addEventListener('click',(e)=>{
             },
             body:JSON.stringify({url:input.value,startIndex:startIndex})
             })
-            .then(response => { return response.json()} )
+            .then(response => { 
+                if(response.status === 505){
+                    errorMsg("something went wrong try again")
+                    hideLoading()
+                    return
+                }
+                return response.json()} )
             .then((response)=>{
+                removeLinkFromContainer()
                 hideLoading()
                 const lengthOfPlaylist = response.titles.length
                 for(let i = 0; i < lengthOfPlaylist; i++){

@@ -11,32 +11,41 @@ CORS(app)
 def give_data(download_method:str):
     
     if download_method == "download_video":
-        data = request.json
-        dw_url = download_video(data['url'])
+        try:
+            data = request.json
+            dw_url = download_video(data['url'])
         
-        return {
+            return {
                 'title':dw_url['titles'],
                 'url': dw_url['urls']
 
                 }
+        except:
+            return "error",505
 
     elif download_method == "download_playlist":
-        data = request.json
-        dw_url = download_playlist(data['url'])
+        try:
+            data = request.json
+            dw_url = download_playlist(data['url'])
 
-        return{
-                'titles':dw_url['titles'],
-                'urls':dw_url['urls']
+            return{
+                    'titles':dw_url['titles'],
+                    'urls':dw_url['urls']
                 }
+        except:
+            return "error",505
 
     elif download_method == "download_playlist_specific":
-        data = request.json
-        dw_url = download_playlist_specific(data['url'], data['startIndex'])
+        try:
+            data = request.json
+            dw_url = download_playlist_specific(data['url'], data['startIndex'])
         
-        return{
-                'titles':dw_url['titles'],
-                'urls':dw_url['urls']
+            return{
+                    'titles':dw_url['titles'],
+                    'urls':dw_url['urls']
                 }
+        except:
+            return "error",505
 
 
     return "bing chiling"
