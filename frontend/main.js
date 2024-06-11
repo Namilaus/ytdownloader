@@ -69,13 +69,13 @@ button.addEventListener('click',(e)=>{
     showLoading();
     e.preventDefault()
    
-    if(input.value==='' || option.value ===''){
+    if(input.value=== '' || option.value === ''){
         errorMsg("Either input is blank or option is not selected you may put the url or select one of them options please!")
         console.log(option.value)
         return
     }
     else if(input.value!=='' && option.value === 'download_video'){
-    fetch('http://127.0.0.1:8000/download_video',{
+    fetch('https://ytdownloader.atayi.net:8443/download_video',{
         method:'POST',
         mode:"cors",
         headers: {
@@ -84,10 +84,11 @@ button.addEventListener('click',(e)=>{
         body:JSON.stringify({url:input.value})
     })
         .then(response => { 
-            console.log(response)
-            if(response.status === 505){
-                errorMsg("Something went wrong try again, Please make sure that you chose the right Option and type the right link in input")
+            
+            if(response.status !== 200){
+                removeErrorMsg()
                 hideLoading()
+                errorMsg("Something went wrong try again, Please make sure that you chose the right Option and type the right link in input")
                 return
             }
             return response.json()} )
@@ -99,7 +100,7 @@ button.addEventListener('click',(e)=>{
     
 }
     else if(input.value!=='' && option.value === 'download_playlist'){
-        fetch('http://127.0.0.1:8000/download_playlist',{
+        fetch('https://ytdownloader.atayi.net:8443/download_playlist',{
             method:'POST',
             mode:"cors",
             headers: {
@@ -108,9 +109,11 @@ button.addEventListener('click',(e)=>{
             body:JSON.stringify({url:input.value})
             })
             .then(response => { 
-                if(response.status === 505){
-                    errorMsg("Something went wrong try again, Please make sure that you chose the right Option and type the right link in input")
+                if(response.status !== 200){
+                    removeErrorMsg()
                     hideLoading()
+                    errorMsg("Something went wrong try again, Please make sure that you chose the right Option and type the right link in input")
+                    
                     return
                 }
                 return response.json() } )
@@ -126,7 +129,7 @@ button.addEventListener('click',(e)=>{
     else if(input.value!=='' && option.value === 'download_playlist_from'){
         const startIndex  = parseInt(document.getElementById("startIndex").value)
         console.log(startIndex)
-        fetch('http://127.0.0.1:8000/download_playlist_specific',{
+        fetch('https://ytdownloader.atayi.net:8443/download_playlist_specific',{
             method:'POST',
             mode:"cors",
             headers: {
@@ -135,9 +138,11 @@ button.addEventListener('click',(e)=>{
             body:JSON.stringify({url:input.value,startIndex:startIndex})
             })
             .then(response => { 
-                if(response.status === 505){
-                    errorMsg("Something went wrong try again, Please make sure that you chose the right Option and type the right link in input")
+                if(response.status !== 200){
+                    removeErrorMsg()
                     hideLoading()
+                    errorMsg("Something went wrong try again, Please make sure that you chose the right Option and type the right link in input")
+                    
                     return
                 }
                 return response.json()} )
@@ -152,26 +157,4 @@ button.addEventListener('click',(e)=>{
     }
 })
 
-
-
-
-
-
-
-
-
-// datas = {
-//     url:'https://www.youtube.com/watch?v=viukm2i-eYY&list=PLwXXfk5wsyAB0jtiodt1i6NB5rvv_ZiKd'
-// }
-
-// fetch('http://127.0.0.1:8000/download_playlist',{
-//     method:'POST',
-//     mode:"cors",
-//     headers: {
-//         "Content-Type": "application/json",
-//     },
-//     body:JSON.stringify(datas)
-// }).then(res => { 
-//     console.log(res)
-//     return res.json()}).then(resp=>console.log(resp))
 
