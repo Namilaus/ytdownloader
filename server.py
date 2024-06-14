@@ -52,4 +52,6 @@ def give_data(download_method:str):
 
 
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0',port=8000)
+    # 8443 port because cloudflare resolve just few ports
+    
+    app.run(ssl_context = 'adhoc',debug=True,host='0.0.0.0',port=8443)
