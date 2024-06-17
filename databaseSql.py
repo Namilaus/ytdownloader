@@ -16,9 +16,9 @@ def connection_db():
       password=password,
       database = database)
     
-  except mysql.connector.Error as err:
+  except mysql.connector.Error as error:
       # Print an error message if connection fails
-      print("Connection failed:", err)
+      print("Connection failed:", error)
       return
   return connection
    
@@ -40,8 +40,8 @@ def insert_into_playlist(yt_url:str):
         mycommand.execute("SELECT id FROM video ORDER BY id DESC LIMIT 1")
         videoID = mycommand.fetchone()
         mycommand.execute("INSERT INTO videotoplaylist (videoID,playlistID) VALUES (%s, %s)", (videoID[0],playlistID[0]))
-    except Error:
-       print(Error)
+    except Error as error:
+       print(error)
     finally:
       connection.commit()
       print("Inserting to MySQL database successful!")
@@ -54,18 +54,47 @@ def insert_video(yt_url:str):
       data = download_video(yt_url)
       mycommand = connection.cursor()
       mycommand.execute("INSERT INTO playlist(title, yt_url, yt_dw) VALUES(%s, %s, %s)",(data['titles'], data['urls'], yt_url))
-    except Error:
-       print(Error)
+    except Error as error:
+       print(error)
     finally:
       connection.commit()
       connection.close()
 
 
+def serach_for_video(yt_url:str):
+    try:
+        connection = connection_db()
+        
+        with connection.cursor() as mycommand:
+            mycommand.execute("SELECT * FROM video WHERE yt_url = %s",(yt_url, ))
+            data = mycommand.fetchall()
+            if data is None:
+               connection.close()
+               return None
+            return data
+            
+    except Error as error:
+       print(error)
 
-    
+
+def serach_for_playlist(yt_url:str):
+    try:
+        connection = connection_db()
+
+        with connection.cursor() as mycommand:
+            mycommand.execute("SELECT title FROM video WHERE id IN ( SELECT videoID FROM videotoplaylist WHERE videoId IN (SELECT id FROM playlist WHERE yt_url = %s ))",(yt_url, ))
+            data = mycommand.fetchall()
+            if data is None:
+               connection.close()
+               return None
+            return data
+            
+    except Error as error:
+       print(error)
+
 
    
 
-#insert_into_playlist("https://www.youtube.com/watch?v=viukm2i-eYY&list=PLwXXfk5wsyAB0jtiodt1i6NB5rvv_ZiKd")
+#print(serach_for_playlist("https://www.youtube.com/watch?v=viukm2i-eYY&list=PLwXXfk5wsyAB0jtiodt1i6NB5rvv_ZiKd"))
 
 
