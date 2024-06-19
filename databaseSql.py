@@ -1,6 +1,5 @@
 import mysql.connector
 from mysql.connector import Error
-from main import download_playlist,download_video
 
 class database:
 
