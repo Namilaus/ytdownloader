@@ -69,8 +69,9 @@ def serach_for_video(yt_url:str):
             mycommand.execute("SELECT * FROM video WHERE yt_url = %s",(yt_url, ))
             data = mycommand.fetchall()
             if data is None:
-               connection.close()
                return None
+
+            connection.close()
             return data
             
     except Error as error:
@@ -85,8 +86,9 @@ def serach_for_playlist(yt_url:str):
             mycommand.execute("SELECT title FROM video WHERE id IN ( SELECT videoID FROM videotoplaylist WHERE videoId IN (SELECT id FROM playlist WHERE yt_url = %s ))",(yt_url, ))
             data = mycommand.fetchall()
             if data is None:
-               connection.close()
                return None
+
+            connection.close()
             return data
             
     except Error as error:
