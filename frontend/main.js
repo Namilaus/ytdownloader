@@ -70,6 +70,7 @@ button.addEventListener('click',(e)=>{
     e.preventDefault()
    
     if(input.value=== '' || option.value === ''){
+        hideLoading()
         errorMsg("Either input is blank or option is not selected you may put the url or select one of them options please!")
         console.log(option.value)
         return
