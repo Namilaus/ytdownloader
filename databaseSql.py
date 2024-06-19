@@ -26,7 +26,7 @@ class database:
     return connection
    
 
-    def insert_into_playlist(self, yt_url:str, data):
+    def insert_into_playlist(self, yt_url:str, data:dict)->int:
         try:
             connection = self.connection_db()
             #for element in range(0,data['playlist_length']):
@@ -43,14 +43,19 @@ class database:
                 videoID = mycommand.fetchone()
                 mycommand.execute("INSERT INTO videotoplaylist (videoID,playlistID) VALUES (%s, %s)", (videoID[0],playlistID[0]))
         except Error as error:
+            
             print(error)
+            return 405
+        
         finally:
+
             connection.commit()
             print("Inserting to MySQL database successful!")
             connection.close()
+            return 200
 
 
-    def insert_video(self, yt_url:str, data):
+    def insert_video(self, yt_url:str, data:dict)->int:
         try:
             connection = self.connection_db()
             mycommand = connection.cursor()
