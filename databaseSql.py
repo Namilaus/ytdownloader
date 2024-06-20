@@ -18,12 +18,14 @@ class database:
             user=self.username,
             password=self.password,
             database = self.database)
+
+            #print(connection)
     
         except mysql.connector.Error as error:
             # Print an error message if connection fails
             print("Connection failed:", error)
-        return
-    return connection
+            return
+        return connection
    
 
     def insert_into_playlist(self, yt_url:str, data:dict)->int:
@@ -55,16 +57,18 @@ class database:
             return 200
 
 
-    def insert_video(self, yt_url:str, data:dict)->int:
+    def insert_video(self, yt_url:str, data)->int:
         try:
             connection = self.connection_db()
             mycommand = connection.cursor()
-            mycommand.execute("INSERT INTO playlist(title, yt_url, yt_dw) VALUES(%s, %s, %s)",(data['titles'], data['urls'], yt_url))
+            mycommand.execute("INSERT INTO video(title, yt_url, yt_dw) VALUES(%s, %s, %s)",(data['titles'], yt_url, data['urls']))
         except Error as error:
             print(error)
+            return 505
         finally:
             connection.commit()
             connection.close()
+            return 200
 
 
     def serach_for_video(self, yt_url:str):
@@ -89,7 +93,7 @@ class database:
             connection = self.connection_db()
 
             with connection.cursor() as mycommand:
-                mycommand.execute("SELECT title FROM video WHERE id IN ( SELECT videoID FROM videotoplaylist WHERE videoId IN (SELECT id FROM playlist WHERE yt_url = %s ))",(yt_url, ))
+                mycommand.execute("SELECT * FROM video WHERE id IN ( SELECT videoID FROM videotoplaylist WHERE videoId IN (SELECT id FROM playlist WHERE yt_url = %s ))",(yt_url, ))
                 data = mycommand.fetchall()
                 if data is None:
                     return None
