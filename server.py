@@ -16,7 +16,7 @@ def give_data(download_method:str):
             result = database.serach_for_video(data['url'])
             if len(result) == 0 or result == None: # if its not in database then we scrap it and savte to database for future use
                 dw_url = download_video(data['url'])
-                database.insert_video(dw_url)
+                database.insert_video(data['url'],dw_url)
                 return {
                 'title':dw_url['titles'],
                 'url': dw_url['urls']
@@ -28,7 +28,8 @@ def give_data(download_method:str):
                 'url': result[0][2]
 
                 }
-        except:
+        except TypeError as err:
+            print(err)
             return "error",505
 
     elif download_method == "download_playlist":
@@ -53,7 +54,8 @@ def give_data(download_method:str):
                     'titles':titles,
                     'urls':urls
                     }
-        except:
+        except TypeError as err:
+            print(err)
             return "error",505
 
     elif download_method == "download_playlist_specific":
@@ -65,7 +67,8 @@ def give_data(download_method:str):
                     'titles':dw_url['titles'],
                     'urls':dw_url['urls']
                 }
-        except:
+        except TypeError as err:
+            print(err)
             return "error",505
 
 
