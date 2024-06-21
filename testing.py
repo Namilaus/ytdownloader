@@ -13,23 +13,23 @@
 from databaseSql import database
 from main import download_video, download_playlist
 
-databasee =  database("localhost", "root", "", "ytdownloader")
+databasee =  database("ytdownloader-sulai-a5e0.i.aivencloud.com", "avnadmin", "ANSGlZB0OmAs", "ytdownloader")
 
-yt_url = "https://www.youtube.com/watch?v=viukm2i-eYY&list=PLwXXfk5wsyAB0jtiodt1i6NB5rvv_ZiKd"
-#data = download_playlist(yt_url)
+yt_url = "https://www.youtube.com/watch?v=d9JrOgLE8DE"
+#data = download_video(yt_url)
 
 
-#databasee.insert_into_playlist(yt_url, data)
+#databasee.insert_video(yt_url, data)
 
-result = databasee.serach_for_playlist(yt_url)
+result = databasee.serach_for_video(yt_url)
 
 if len(result) == 0 or result == None:
     print(None)
 else:
-    urls = list()
-    titles = list()
-    for i in range(0,len(result)):
-        urls.append(result[i][2])
-        titles.append(result[i][3])
-    print(urls)
+    print(result)
+#    titles = list()
+#    for i in range(0,len(result)):
+#        urls.append(result[i][2])
+#        titles.append(result[i][3])
+#    print(urls)
 

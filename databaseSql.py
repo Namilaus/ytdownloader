@@ -17,7 +17,8 @@ class database:
             host=self.hostname,
             user=self.username,
             password=self.password,
-            database = self.database)
+            database = self.database,
+            port = 13497)
 
             #print(connection)
     
