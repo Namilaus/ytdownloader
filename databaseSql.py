@@ -36,10 +36,10 @@ class database:
             mycommand = connection.cursor()
             mycommand.execute("INSERT INTO playlist(yt_url, length) VALUES(%s,%s)",(yt_url,data['playlist_length']))
             mycommand.execute("SELECT id FROM playlist ORDER BY id DESC LIMIT 1")
-            playlistID = mycommand.fetchone()
-  
+            playlistID = mycommand.fetchone() # get playlistId for the sql realiton
+             
 
-            for element in range(0,data['playlist_length']):
+            for element in range(0,data['playlist_length']): # inserting all of the playlist video into video sql table
                 mycommand.execute("INSERT INTO video (title, yt_dw) VALUES (%s, %s)",(data['titles'][element],data['urls'][element]))
                 mycommand.execute("SELECT id FROM video ORDER BY id DESC LIMIT 1")
                 videoID = mycommand.fetchone()
@@ -92,7 +92,7 @@ class database:
         try:
             connection = self.connection_db()
 
-            with connection.cursor() as mycommand:
+            with connection.cursor() as mycommand: # instead of JOINs using WHERE because of speed and performance
                 mycommand.execute("SELECT * FROM video WHERE id IN ( SELECT videoID FROM videotoplaylist WHERE playlistID IN (SELECT id FROM playlist WHERE yt_url = %s ))",(yt_url, ))
                 data = mycommand.fetchall()
                 if data is None:

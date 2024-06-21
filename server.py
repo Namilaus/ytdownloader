@@ -3,20 +3,18 @@ from main import download_video,download_playlist,download_playlist_specific
 from flask_cors import CORS
 from databaseSql import database
 
-
 app = Flask(__name__)
 CORS(app)
 database = database("localhost", "root", "", "ytdownloader")
 
 @app.route("/<download_method>",methods=['GET','POST'])
 def give_data(download_method:str):
-    
+    # checking POST url
     if download_method == "download_video":
         try:
-
-            data = request.json
+            data = request.json # searching for download url in database for faster respond
             result = database.serach_for_video(data['url'])
-            if len(result) == 0 or result == None:
+            if len(result) == 0 or result == None: # if its not in database then we scrap it and savte to database for future use
                 dw_url = download_video(data['url'])
                 database.insert_video(dw_url)
                 return {
@@ -46,7 +44,7 @@ def give_data(download_method:str):
                     'urls':dw_url['urls']
                     }
             else:
-                urls = list()
+                urls = list()  # prepare data to return
                 titles = list()
                 for index in range(0,len(result)):
                     urls.append(result[index][2])

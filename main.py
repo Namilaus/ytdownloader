@@ -36,7 +36,7 @@ def download_playlist(playlist_url:str)->dict:
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         # Download the playlist
         playlist_info = ydl.extract_info(playlist_url, download=False)
-        
+           
     playlist_length = playlist_info['playlist_count']
     
     playlist_urls = {
@@ -44,7 +44,7 @@ def download_playlist(playlist_url:str)->dict:
                 'urls':[],
                 'playlist_length':playlist_length
             }
-
+    # prepare data to for returning
     for index in range(0,playlist_length):
         playlist_urls['titles'].append(playlist_info['entries'][index]['fulltitle'])
         playlist_urls['urls'].append(playlist_info['entries'][index]['url'])    
@@ -68,15 +68,15 @@ def download_playlist_specific(playlist_url:str,playliststart:int)->dict:
         # Download the playlist
         playlist_info = ydl.extract_info(playlist_url, download=False)
         
-    
+     
     playlist_length = playlist_info['playlist_count'] - playliststart + 1
-    print(playlist_length)
+    
     playlist_urls = {
                 'titles':[],
                 'urls':[],
                 'playlist_length':playlist_length
             }
-
+    
     for index in range(0,playlist_length):
         playlist_urls['titles'].append(playlist_info['entries'][index]['fulltitle'])
         playlist_urls['urls'].append(playlist_info['entries'][index]['url'])    
