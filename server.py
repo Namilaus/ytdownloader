@@ -1,23 +1,33 @@
 from flask import Flask,request
 from main import download_video,download_playlist,download_playlist_specific
 from flask_cors import CORS
+from databaseSql import database
 
 
 app = Flask(__name__)
 CORS(app)
-
+database = database("localhost", "root", "", "ytdownloader")
 
 @app.route("/<download_method>",methods=['GET','POST'])
 def give_data(download_method:str):
     
     if download_method == "download_video":
         try:
+
             data = request.json
-            dw_url = download_video(data['url'])
-        
-            return {
+            result = database.serach_for_video(data['url'])
+            if len(result) == 0 or result == None:
+                dw_url = download_video(data['url'])
+                database.insert_video(dw_url)
+                return {
                 'title':dw_url['titles'],
                 'url': dw_url['urls']
+
+                }
+            else:
+                return {
+                'title':result[0][3],
+                'url': result[0][2]
 
                 }
         except:

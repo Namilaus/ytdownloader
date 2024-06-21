@@ -24,9 +24,8 @@ yt_url = "https://www.youtube.com/watch?v=2-L8wa0vkhA"
 
 result = databasee.serach_for_video(yt_url)
 
-print(result[0][0] , result[0][1])
-
-
-
-
+if len(result) == 0 or result == None:
+    print(1)
+else:
+    print(result[0][0], result[0][1], result[0][2], result[0][3])
 
