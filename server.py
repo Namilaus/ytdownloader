@@ -47,9 +47,9 @@ def give_data(download_method:str):
             else:
                 urls = list()  # prepare data to return
                 titles = list()
-                for index in range(0,len(result)):
-                    urls.append(result[index][2])
-                    titles.append(result[index][3])
+                for index in range(0,len(results)):
+                    urls.append(results[index][2])
+                    titles.append(results[index][3])
                 return{
                     'titles':titles,
                     'urls':urls

@@ -53,7 +53,6 @@ class database:
         finally:
 
             connection.commit()
-            print("Inserting to MySQL database successful!")
             connection.close()
             return 200
 
