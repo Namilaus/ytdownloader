@@ -15,17 +15,21 @@ from main import download_video, download_playlist
 
 databasee =  database("localhost", "root", "", "ytdownloader")
 
-yt_url = "https://www.youtube.com/watch?v=2-L8wa0vkhA"
-#data = download_video(yt_url)
+yt_url = "https://www.youtube.com/watch?v=viukm2i-eYY&list=PLwXXfk5wsyAB0jtiodt1i6NB5rvv_ZiKd"
+#data = download_playlist(yt_url)
 
-#print(data)
 
-#databasee.insert_video(yt_url, data)
+#databasee.insert_into_playlist(yt_url, data)
 
-result = databasee.serach_for_video(yt_url)
+result = databasee.serach_for_playlist(yt_url)
 
 if len(result) == 0 or result == None:
-    print(1)
+    print(None)
 else:
-    print(result[0][0], result[0][1], result[0][2], result[0][3])
+    urls = list()
+    titles = list()
+    for i in range(0,len(result)):
+        urls.append(result[i][2])
+        titles.append(result[i][3])
+    print(urls)
 

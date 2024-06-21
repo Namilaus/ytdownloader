@@ -71,7 +71,7 @@ class database:
             return 200
 
 
-    def serach_for_video(self, yt_url:str):
+    def serach_for_video(self, yt_url:str)->list:
         try:
             connection = self.connection_db()
         
@@ -88,12 +88,12 @@ class database:
             print(error)
 
 
-    def serach_for_playlist(self, yt_url:str):
+    def serach_for_playlist(self, yt_url:str)->list:
         try:
             connection = self.connection_db()
 
             with connection.cursor() as mycommand:
-                mycommand.execute("SELECT * FROM video WHERE id IN ( SELECT videoID FROM videotoplaylist WHERE videoId IN (SELECT id FROM playlist WHERE yt_url = %s ))",(yt_url, ))
+                mycommand.execute("SELECT * FROM video WHERE id IN ( SELECT videoID FROM videotoplaylist WHERE playlistID IN (SELECT id FROM playlist WHERE yt_url = %s ))",(yt_url, ))
                 data = mycommand.fetchall()
                 if data is None:
                     return None

@@ -36,12 +36,25 @@ def give_data(download_method:str):
     elif download_method == "download_playlist":
         try:
             data = request.json
-            dw_url = download_playlist(data['url'])
+            results = database.serach_for_playlist(data['url'])
+            if len(results) == 0 or results == None:
+                dw_url = download_playlist(data['url'])
+                database.insert_into_playlist(data['url'], dw_url)
 
-            return{
+                return{
                     'titles':dw_url['titles'],
                     'urls':dw_url['urls']
-                }
+                    }
+            else:
+                urls = list()
+                titles = list()
+                for index in range(0,len(result)):
+                    urls.append(result[index][2])
+                    titles.append(result[index][3])
+                return{
+                    'titles':titles,
+                    'urls':urls
+                    }
         except:
             return "error",505
 
@@ -62,6 +75,6 @@ def give_data(download_method:str):
 
 
 if __name__ == '__main__':
-    # 8443 port because cloudflare resolve just few ports
+    # 8443 port because cloudflare resolve just few ports and 8443 is one of them
     
     app.run(ssl_context = 'adhoc',debug=True,host='0.0.0.0',port=8443)
