@@ -21,9 +21,9 @@ function errorMsg(text){
 }
 
 function removeErrorMsg(){
-    errorMsgEl = document.getElementsByClassName("error")[0]
-    if(errorMsgEl !== undefined){
-        container.removeChild(errorMsgEl)
+    errorMsg = document.getElementsByClassName("error")[0]
+    if(errorMsg !== undefined){
+        container.removeChild(errorMsg)
     }
 }
 
