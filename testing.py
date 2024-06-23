@@ -14,10 +14,9 @@ from databaseSql import database
 from main import download_video, download_playlist
 
 databasee =  database("ytdownloader-sulai-a5e0.i.aivencloud.com", "avnadmin", "ANSGlZB0OmAs", "ytdownloader")
-
+dwq=33
 yt_url = "https://www.youtube.com/watch?v=d9JrOgLE8DE"
 #data = download_video(yt_url)
-
 
 #databasee.insert_video(yt_url, data)
 
@@ -32,4 +31,3 @@ else:
 #        urls.append(result[i][2])
 #        titles.append(result[i][3])
 #    print(urls)
-
