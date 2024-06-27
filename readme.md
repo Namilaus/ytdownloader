@@ -77,7 +77,8 @@ The application will be accessible at https://localhost:8443.
 {
   "title": "Video Title",
   "url": "Download URL"
-}```
+}
+```
 #### Download Playlist
 - Endpoint: /download_playlist
 - Method: POST
@@ -85,13 +86,15 @@ The application will be accessible at https://localhost:8443.
 ```json
 {
   "url": "https://www.youtube.com/playlist?list=PLAYLIST_ID"
-}```
+}
+```
 - Response:
 ```json
 {
   "titles": ["Title 1", "Title 2", "..."],
   "urls": ["URL 1", "URL 2", "..."]
-}```
+}
+```
 #### Download Playlist From Specific Index
 - Endpoint: /download_playlist_specific
 - Method: POST
@@ -100,13 +103,15 @@ The application will be accessible at https://localhost:8443.
 {
   "url": "https://www.youtube.com/playlist?list=PLAYLIST_ID",
   "startIndex": 2
-}```
+}
+```
 - Response:
 ```json
 {
   "titles": ["Title 2", "Title 3", "..."],
   "urls": ["URL 2", "URL 3", "..."]
-}```
+}
+```
 ### Database Schema
 ```sql
 -- create database
