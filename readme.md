@@ -62,21 +62,23 @@ The application will be accessible at https://localhost:8443.
 3. Select the desired download option (video, playlist, or playlist from a specific index).
 4. Click the "Download" button to fetch the download link(s).
 ### API Endpoints
-## Download Video
+#### Download Video
 - Endpoint: /download_video
 - Method: POST
 - Payload:
 ```json
 {
   "url": "https://www.youtube.com/watch?v=VIDEO_ID"
-}```
+}
+```
+
 - Response:
 ```json
 {
   "title": "Video Title",
   "url": "Download URL"
 }```
-## Download Playlist
+#### Download Playlist
 - Endpoint: /download_playlist
 - Method: POST
 - Payload:
@@ -90,7 +92,7 @@ The application will be accessible at https://localhost:8443.
   "titles": ["Title 1", "Title 2", "..."],
   "urls": ["URL 1", "URL 2", "..."]
 }```
-## Download Playlist From Specific Index
+#### Download Playlist From Specific Index
 - Endpoint: /download_playlist_specific
 - Method: POST
 - Payload:
@@ -141,9 +143,9 @@ ALTER TABLE videotoplaylist ADD FOREIGN KEY(playlistID) REFERENCES playlist(id);
 ### Contributing
 Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
-# License
+### License
 This project is licensed under the MIT License.
 
-# Acknowledgements
+### Acknowledgements
 yt-dlp for providing an excellent library to download YouTube videos.
 Flask for making web development easy and straightforward.
