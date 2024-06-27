@@ -1,0 +1,11 @@
+User muss die moglichkeit haben, mit ein youtube link den video herunterzuladen
+User kann den quality und datei extention auswahlen sont wird das beste quality und mp4 automatisch ausgewahlt
+User muss die moglichkeit haben, ein ganzes youtube playlist herunterzuladen.
+User kann auswahlen von welche video bis ende  ein playlist heruntergeladen wird.
+
+In the context of a .tml (typically pyproject.toml) file, the caret symbol (^) is used as a version constraint operator.
+
+^3.0.2 specifies that the version of Flask should be at least 3.0.2, but it should not include any breaking changes that would come with a new major version.
+According to SemVer, a version number is typically in the form of MAJOR.MINOR.PATCH.
+The caret (^) allows updates that do not modify the left-most non-zero digit in the version number:
+^3.0.2 would include versions like 3.0.2, 3.0.3, 3.1.0, 3.2.1, etc., but not 4.0.0 or higher because those would be considered breaking changes.
