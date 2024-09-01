@@ -29,12 +29,14 @@ class database:
         except mysql.connector.Error as error:
             # Print an error message if connection fails
             print("Connection failed:", error)
-            return
+            return None
         return connection
 
     def insert_into_playlist(self, yt_url: str, data: dict) -> int:
         try:
             connection = self.connection_db()
+            if connection == None:
+                return None
             # for element in range(0,data['playlist_length']):
             # print(data['titles'][element],data['urls'][element])
             mycommand = connection.cursor()
@@ -72,6 +74,8 @@ class database:
     def insert_video(self, yt_url: str, data) -> int:
         try:
             connection = self.connection_db()
+            if connection == None:
+                return None
             mycommand = connection.cursor()
             mycommand.execute(
                 "INSERT INTO video(title, yt_url, yt_dw) VALUES(%s, %s, %s)",
@@ -88,6 +92,8 @@ class database:
     def serach_for_video(self, yt_url: str) -> list:
         try:
             connection = self.connection_db()
+            if connection == None:
+                return None
 
             with connection.cursor() as mycommand:
                 mycommand.execute("SELECT * FROM video WHERE yt_url = %s", (yt_url,))
@@ -104,7 +110,8 @@ class database:
     def serach_for_playlist(self, yt_url: str) -> list:
         try:
             connection = self.connection_db()
-
+            if connection == None:
+                return None
             with connection.cursor() as mycommand:  # instead of JOINs using WHERE because of speed and performance
                 mycommand.execute(
                     "SELECT * FROM video WHERE id IN ( SELECT videoID FROM videotoplaylist WHERE playlistID IN (SELECT id FROM playlist WHERE yt_url = %s ))",
